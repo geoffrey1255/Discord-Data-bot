@@ -1,0 +1,11 @@
+[COMPLETED]-fix duplicate entries for counter list with -add commmand, or add a remove duplicate function, 
+[COMPLETED]-fix textwrap for kill order column of description
+-manually do winrate over all sieges in record excel sheet
+-fix atkmade equations
+[COMPLETED]-add error message when counter doesnt exist for defence yet
+-add rating system for rating counters out of 5
+-add command which pulls up all database
+-add dropdown menu for counters list
+-reduce typing as much as possible
+-winrate vs each guild
+-delay in -match update
