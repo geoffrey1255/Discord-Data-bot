@@ -74,7 +74,6 @@ def helper():
         attack_log_battle_log_list = pd.json_normalize(data['attack_log']['log_list'], record_path =['battle_log_list'])
         defense_log_battle_log_list = pd.json_normalize(data['defense_log']['log_list'], record_path =['battle_log_list'])
         current_attack_log = attack_log_battle_log_list.merge(match_info, how="inner",on=['match_id','siege_id'])
-        print(guild_list)
 
             
         attack_stats_temp = current_attack_log.groupby(['wizard_name','win_lose']).size().reset_index(name='counts')
@@ -94,7 +93,6 @@ def getguild():
             if i["guild_name"] != "Hurt":
                 guild_list += str(i["guild_name"]) + "   "
         guild_list = re.sub("[\/:*?!]", "", guild_list)
-        print(guild_list)
         return guild_list
     
 @client.event
@@ -152,8 +150,6 @@ async def completed(message):
         attack_stats_by_wizard.to_excel(writer, sheet_name=str(guilds_name))
         writer.save()
         
-        print(guilds_name)
-
         await message.send("```Match has been recorded!```")
 
 
@@ -244,7 +240,6 @@ async def counter(message, unit_one=None, unit_two=None, unit_three=None):
 
     if unit_two is not None and unit_three is not None:
         temp = ""
-        print("test")
         if unit_two > unit_three:
             unit_two, unit_three = unit_three, unit_two
     else:
@@ -415,7 +410,6 @@ async def player_vs(message, user=None, user_input=None):
         loss += rows[1]
 
     winrate = wins / (wins + loss)
-    print(sql_return)
 
     headers = ["Wins", "Losses", "Winrate", "Enemy_Guild_One", "Enemy_Guild_Two", "Season"]
     await message.send("```{}```".format(tabulate(sql_return, headers, showindex=False)))
@@ -440,7 +434,7 @@ async def player_season(message, user=None, user_input=None):
 
     winrate = wins / (wins + loss)
 
-    print(sql_return)
+
     headers = ["Wins", "Losses", "Winrate", "Enemy_Guild_One", "Enemy_Guild_Two", "Season"]
     await message.send("```{}```".format(tabulate(sql_return, headers, showindex=False)))
     await message.send("```Your winrate is {}```".format(round(winrate,2)))
