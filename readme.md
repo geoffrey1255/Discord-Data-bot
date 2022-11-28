@@ -22,11 +22,20 @@ Discord Data Bot is a tool used to analyze thousands of pieces of data and retur
 * player": Displays player history of matches
 * player_vs": Displays player history of matches versus specified team
 * player_season": Displays player history of matches in a given season
-
+* 
+#### Stats Command
 ![stats command](./images/stats.png)
+
+#### Match Command
 ![match command](./images/match.png)
+
+#### Register Commamnd
 ![register command](./images/register.png)
+
+#### Player Command
 ![player command](./images/history.png)
+
+#### MySQL ER Diagram
 ![mysql ER diagram](./images/mysqldiagram.png)
 
 
