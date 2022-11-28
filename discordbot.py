@@ -39,17 +39,8 @@ sql_db = mysql.connector.connect(
 sql_cursor = sql_db.cursor()
 
 
-
 client = commands.Bot(command_prefix = "-")
 spd = {'3': 477, '4':358, '5':286, '6':239, '7':205, '8':179}
-##
-##    folder_path = os.getenv('YOUR_FOLDER_PATH')
-##    file_type = '\*json'
-##    files = glob.glob(folder_path + file_type)
-##    max_file = max(files, key=os.path.getctime)
-##    target = os.getenv('YOUR_TARGET')
-##    shutil.copyfile(max_file, target)
-##    with open("siege.json", 'r', encoding='utf=8') as json_file:
 
 
 comm = {
@@ -159,7 +150,6 @@ async def completed(message):
         writer.book = ExcelWorkbook
         writer.sheets = dict((ws.title, ws) for ws in ExcelWorkbook.worksheets)
         attack_stats_by_wizard.to_excel(writer, sheet_name=str(guilds_name))
-##        guild_stats.to_excel(writer, startcol=0, startrow=30, sheet_name=str(guilds_name))
         writer.save()
         
         print(guilds_name)
@@ -319,10 +309,6 @@ async def add(message, defense_team, offense_team, description):
     now=datetime.now()
     dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
 
-    print(type(dt_string))
-    print(dt_string)
-    print(type(description))
-
     args = [defense_team, offense_team, description, disc_id, dt_string]
 
     sql_cursor.callproc('checkCounter', [defense_team, offense_team])
@@ -366,7 +352,7 @@ async def register(message, summoners_id=None):
         await message.send("```this command does not work in this text channel```")
         return 0
 
-    print(message.author, message.author.display_name, summoners_id)
+
 
     disc_id = str(message.author)
     disc_display_name = message.author.display_name
@@ -376,7 +362,7 @@ async def register(message, summoners_id=None):
         sql_return = result.fetchall()
     args = [disc_id, disc_display_name, summoners_id]
 
-    print(sql_return)
+ 
     if len(sql_return) == 0:
         sql_cursor.callproc('addPlayer', args)
         sql_db.commit()
@@ -393,7 +379,7 @@ async def player(message, user=None):
         await message.send("```this command does not work in this text channel```")
         return 0
     args = [user]
-    print(args)
+
     sql_cursor.callproc('GetUserSiege', args)
     for result in sql_cursor.stored_results():
         sql_return = result.fetchall()
@@ -404,7 +390,7 @@ async def player(message, user=None):
         loss += rows[1]
     winrate = wins / (wins + loss)
 
-    # print(sql_return)
+  
     headers = ["Wins", "Losses", "Winrate", "Enemy_Guild_One", "Enemy_Guild_Two", "Season"]
     await message.send("```{}```".format(tabulate(sql_return, headers, showindex=False)))
     await message.send("```Your winrate is {}```".format(round(winrate,2)))
@@ -458,22 +444,6 @@ async def player_season(message, user=None, user_input=None):
     headers = ["Wins", "Losses", "Winrate", "Enemy_Guild_One", "Enemy_Guild_Two", "Season"]
     await message.send("```{}```".format(tabulate(sql_return, headers, showindex=False)))
     await message.send("```Your winrate is {}```".format(round(winrate,2)))
-
-# maybe implement at later date after fixing pull issue
-# @client.command()
-# async def player_wr(message, user_input=None):
-# ##    user_input = int(user_input)
-    
-#     sql_cursor.execute("SELECT Summoners_ID, Wins, Losses, Winrate, Enemy_Guild_One, Enemy_Guild_Two, Season FROM siege WHERE Season = %d", [int(user_input)])        
-#     sql_return = sql_cursor.fetchall()
-#     print(sql_return)
-#     headers = ["Wins", "Losses", "Winrate", "Enemy_Guild_One", "Enemy_Guild_Two", "Season"]
-#     await message.send("```{}```".format(tabulate(sql_return, headers, showindex=False)))
-# ##    for row in myresult:
-# ##        print(row)
-# ##        print(type(row))
-# ##    await message.send("```{}```".format(tabulate(sheet, headers, showindex=False, maxcolwidths=[None, None, 50])))
-
 
 
 client.run(os.getenv('YOUR_TOKEN_ID'))
