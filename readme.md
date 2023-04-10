@@ -35,6 +35,27 @@ Discord Data Bot is a tool used to analyze thousands of pieces of data and retur
 #### Player Command
 ![player command](./images/history.png)
 
+#### Webscrap Monster ID and Name
+![Webscrap](./images/webscrape.png)
+
+this box of code uses open source tool BeautifulSoup to extract information from a website to get monster ID and Name, then it adds the data into the Monster table in MySQL database.
+
+#### Grabbing User Data, storing onto Database
+![playerjson](./images/playerjson.png)
+![monstedata](./images/monsterdata.png)
+
+The first image is a sample of users json Data that gets read by the Discord Bot, the second image displays a small sample of information the bot reads through and adds into the database for user interaction.
+
+#### Displaying Data
+![defense](./images/playermonsters.png)
+
+This image displays the usage of -defense command which displays the number of specified monsters each user has, while showing only the users who have atleast one of each specified monster.
+
+#### Data Visualization
+![Visualization](./images/plot.png)
+
+this image displays a users performance in comparison with the best worst player in that day, as well as their performance from day to day.
+
 #### MySQL ER Diagram
 ![mysql ER diagram](./images/mysqldiagram.png)
 
